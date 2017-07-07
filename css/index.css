@@ -1,0 +1,32 @@
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+th {
+    background-color: lightblue;
+}
+
+button {
+    cursor: pointer;
+}
+
+.bottom_buttons {
+    float: right;
+}
+
+.top_buttons {
+    margin-bottom: 1em;
+}
+
+#output {
+    display: none;
+    margin-top: 1em;
+}
+
+#output_table tbody tr:nth-child(1) td {
+    font-weight: bold;
+}

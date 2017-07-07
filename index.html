@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liveness Analysis</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="screen" />
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/liveness.js"></script>
+</head>
+<body>
+    <br>
+    <h1> Liveness Analysis </h1>
+    <br>
+    <h2> Input </h2>
+    <br>
+    <div id="input" class="container">
+        <div class="top_buttons">
+            <button id="add_row" type="button" class="btn btn-primary pull-left">Add Row</button>   <button type="button" id="delete_row" class="pull-right btn btn-danger">Delete Row</button>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-bordered table-hover" id="input_table">
+                    <thead>
+                    <tr >
+                        <th class="text-center">
+                            Node ID
+                        </th>
+                        <th class="text-center">
+                            def[n]
+                        </th>
+                        <th class="text-center">
+                            use[n]
+                        </th>
+                        <th class="text-center">
+                            pred[n]
+                        </th>
+                        <th class="text-center">
+                            succ[n]
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id='addr0'>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <input type="text" name='def0'  placeholder='ex.: var1, var2, var3, var4' class="form-control" pattern="^(([A-Z|a-z][A-Z|a-z|0-9|_]*)( *, *[A-Z|a-z][A-Z|a-z|0-9|_]*)*)?$"/>
+                        </td>
+                        <td>
+                            <input type="text" name='use0' placeholder='ex.: var1, var2, var3, var4' class="form-control" pattern="^(([A-Z|a-z][A-Z|a-z|0-9|_]*)( *, *[A-Z|a-z][A-Z|a-z|0-9|_]*)*)?$"/>
+                        </td>
+                        <td>
+                            <input type="text" name='pred0' placeholder='ex.: 1, 2, 3, 4' class="form-control" pattern="^([0-9]+( *, *[0-9]+)*)?$"/>
+                        </td>
+                        <td>
+                            <input type="text" name='succ0' placeholder='ex.: 1, 2, 3, 4' class="form-control" pattern="^([0-9]+( *, *[0-9]+)*)?$"/>
+                        </td>
+                    </tr>
+                    <tr id='addr1'></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bottom_buttons">
+            <!--<label for="backwards">Backwards:</label> <input id="backwards" type="checkbox" name="backwards" value="backwards">-->  <button id="submit" type="button" class="btn btn-success pull-right">Generate Table</button>
+        </div>
+    </div>
+    <br>
+    <div id="output" class="container">
+        <h2> Output </h2>
+        <br>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-bordered table-hover" id="output_table">
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
