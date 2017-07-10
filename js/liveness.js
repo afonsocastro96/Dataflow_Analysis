@@ -74,17 +74,12 @@ function compare_arrays(array1, array2) {
         // Check if we have nested arrays
         if (array1[i] instanceof Array && array2[i] instanceof Array) {
             // recurse into the nested arrays
-            if (!compare_arrays(array1[i],array2[i])){
-                console.log("Teste1")
+            if (!compare_arrays(array1[i],array2[i]))
                 return false;
-            }
         }
-        else if (array1[i] !== array2[i]) {
+        else if (array1[i] !== array2[i])
             // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            console.log("Teste2")
             return false;
-        }
     }
-    console.log("Teste")
     return true;
 }
