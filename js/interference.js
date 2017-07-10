@@ -48,7 +48,7 @@ function is_array_in_array(inner_array, outer_array) {
         return false;
     for(let i = 0; i < outer_array.length; ++i)
         if( (outer_array[i].from === inner_array.from && outer_array[i].to === inner_array.to)
-        ||
+            ||
             (outer_array[i].from === inner_array.to && outer_array[i].to === inner_array.from))
             return true;
     return false;
