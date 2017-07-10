@@ -26,7 +26,7 @@ function generate_interference_graph(last_iteration) {
     let variables = [];
     let connections = [];
     for (let i = 0; i < last_iteration.length; ++i) {
-        let out_vars = last_iteration[1];
+        let out_vars = last_iteration[i][1];
         for (let j = 0; j < out_vars.length; ++j)
             if (variables.indexOf(out_vars[j]) < 0)
                 variables.push(out_vars[j]);
@@ -47,7 +47,9 @@ function is_array_in_array(inner_array, outer_array) {
     if (!inner_array || !outer_array)
         return false;
     for(let i = 0; i < outer_array.length; ++i)
-        if(compare_arrays(outer_array[i], inner_array))
+        if( (outer_array[i].from === inner_array.from && outer_array[i].to === inner_array.to)
+        ||
+            (outer_array[i].from === inner_array.to && outer_array[i].to === inner_array.from))
             return true;
     return false;
 }
