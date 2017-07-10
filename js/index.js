@@ -63,6 +63,7 @@ $(document).ready(function(){
             }
         }
         $('#output').show();
+        generate_interference_graph(iterations[iterations.length-1]);
     })
 
 });

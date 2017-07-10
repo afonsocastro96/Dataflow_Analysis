@@ -30,3 +30,10 @@ button {
 #output_table tbody tr:nth-child(1) td {
     font-weight: bold;
 }
+
+#graph {
+    width: 600px;
+    height: 400px;
+    display: table;
+    margin: 0 auto;
+}
