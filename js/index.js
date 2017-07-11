@@ -36,7 +36,15 @@ $(document).ready(function(){
                 line.push(table.rows[row].cells[j].getElementsByTagName("input")[0].value);
             nodes.push(line)
         }
-        var iterations = generate_table(nodes);
+        const isBackwards = $('#backwards').is(":checked");
+        let iterations;
+        if(isBackwards) {
+          let nodes_backwards = {};
+          for (let i = 0; i < nodes.length; ++i)
+              nodes_backwards[nodes.length-1-i] = nodes[i];
+            iterations = generate_table(nodes_backwards);
+        } else
+            iterations = generate_table(nodes);
 
         var output_table = $('#output_table');
         output_table.html('');
@@ -49,7 +57,11 @@ $(document).ready(function(){
         second_row.append('<td>def</td>');
 
         for(let i = 0; i < nodes.length; ++i) {
-            table_body.append("<tr> <td>" + (i+1) + "</td><td>" + nodes[i][USE_ARRAY_POS] +
+            if(isBackwards)
+                table_body.append("<tr> <td>" + (nodes.length-1) + "</td><td>" + nodes[i][USE_ARRAY_POS] +
+                    "</td><td>" + nodes[i][DEF_ARRAY_POS] + "</td> </tr>");
+            else
+                table_body.append("<tr> <td>" + (i+1) + "</td><td>" + nodes[i][USE_ARRAY_POS] +
                 "</td><td>" + nodes[i][DEF_ARRAY_POS] + "</td> </tr>");
         }
 
@@ -58,8 +70,8 @@ $(document).ready(function(){
             second_row.append("<td>in</td>");
             second_row.append("<td>out</td>");
             for (let j = 0; j < nodes.length; ++j) {
-                table_body.find('tr').eq(j+1).append("<td>" + iterations[i][j][0] + "</td>");
-                table_body.find('tr').eq(j+1).append("<td>" + iterations[i][j][1] + "</td>");
+                table_body.find('tr').eq(j + 1).append("<td>" + iterations[i][j][0] + "</td>");
+                table_body.find('tr').eq(j + 1).append("<td>" + iterations[i][j][1] + "</td>");
             }
         }
         $('#output').show();
