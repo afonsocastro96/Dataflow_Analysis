@@ -36,15 +36,9 @@ $(document).ready(function(){
                 line.push(table.rows[row].cells[j].getElementsByTagName("input")[0].value);
             nodes.push(line)
         }
-        const isBackwards = $('#backwards').is(":checked");
+        const is_backwards = $('#backwards').is(":checked");
         let iterations;
-        if(isBackwards) {
-          let nodes_backwards = {};
-          for (let i = 0; i < nodes.length; ++i)
-              nodes_backwards[nodes.length-1-i] = nodes[i];
-            iterations = generate_table(nodes_backwards);
-        } else
-            iterations = generate_table(nodes);
+        iterations = generate_table(nodes, is_backwards);
 
         var output_table = $('#output_table');
         output_table.html('');
@@ -57,12 +51,12 @@ $(document).ready(function(){
         second_row.append('<td>def</td>');
 
         for(let i = 0; i < nodes.length; ++i) {
-            if(isBackwards)
+            if(is_backwards)
                 table_body.append("<tr> <td>" + (nodes.length-1) + "</td><td>" + nodes[i][USE_ARRAY_POS] +
                     "</td><td>" + nodes[i][DEF_ARRAY_POS] + "</td> </tr>");
             else
                 table_body.append("<tr> <td>" + (i+1) + "</td><td>" + nodes[i][USE_ARRAY_POS] +
-                "</td><td>" + nodes[i][DEF_ARRAY_POS] + "</td> </tr>");
+                    "</td><td>" + nodes[i][DEF_ARRAY_POS] + "</td> </tr>");
         }
 
         for(let i = 0; i < iterations.length; ++i) {

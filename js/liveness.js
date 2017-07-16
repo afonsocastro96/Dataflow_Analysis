@@ -1,5 +1,5 @@
-function generate_table(parsed_nodes) {
-    var nodes = separate_sets(parsed_nodes);
+function generate_table(parsed_nodes, backwards) {
+    var nodes = separate_sets(parsed_nodes, backwards);
     var iterations = [];
     var last_iteration = [];
     while (!compare_arrays(last_iteration, nodes)) {
@@ -13,7 +13,7 @@ function generate_table(parsed_nodes) {
     return iterations;
 }
 
-function separate_sets(nodes) {
+function separate_sets(nodes, backwards) {
     var separated_nodes = [];
     for (var i = 0; i < nodes.length; ++i) {
         var node = [];
@@ -27,6 +27,9 @@ function separate_sets(nodes) {
         node.push([], []);
         separated_nodes.push(node);
     }
+    for (var node = 0; node < separated_nodes.length; ++node) {
+        separated_nodes[node][SUCC_ARRAY_POS] = separated_nodes[node][SUCC_ARRAY_POS].map((succ) => (parseInt(succ)-1));
+    }
     return separated_nodes;
 }
 
@@ -34,7 +37,7 @@ function compute_node_in_out(nodes, node_id) {
     var in_array = add_arrays(nodes[node_id][USE_ARRAY_POS], subtract_arrays(nodes[node_id][OUT_ARRAY_POS], nodes[node_id][DEF_ARRAY_POS]));
     var out_array = [];
     for (var i = 0; i < nodes[node_id][SUCC_ARRAY_POS].length; ++i) {
-        var succ = parseInt(nodes[node_id][SUCC_ARRAY_POS][i])-1;
+        var succ = nodes[node_id][SUCC_ARRAY_POS][i];
         out_array = add_arrays(out_array, nodes[succ][IN_ARRAY_POS]);
     }
     nodes[node_id][IN_ARRAY_POS] = in_array;
@@ -78,7 +81,7 @@ function compare_arrays(array1, array2) {
                 return false;
         }
         else if (array1[i] !== array2[i])
-            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+        // Warning - two different object instances will never be equal: {x:20} != {x:20}
             return false;
     }
     return true;
